@@ -50,7 +50,7 @@ body {
   overflow: hidden;
   color: #000;
 }
-button{
+button, a{
   all: unset;
   cursor: pointer;
 }

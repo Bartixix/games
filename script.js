@@ -12,13 +12,26 @@ function setSideWidth() {
   );
 }
 
+function init(target) {
+  switch (target) {
+    case "main":
+      fetch("./html_pages/game.html")
+        .then((res) => res.text())
+        .then((res) => (document.getElementById("content").innerHTML = res));
+  }
+}
+
 document.querySelectorAll(".clickable").forEach((element) => {
   element.addEventListener("click", function (event) {
-    console.log(event.currentTarget)
-    fetch("./html_pages/tournament.html")
-   .then( r => r.text() )
-   .then( t => console.log(t) )
+    console.log(event.currentTarget);
+    fetch(`./html_pages/${event.currentTarget.id}.html`)
+      .then((res) => res.text())
+      .then((res) => {
+        document.getElementById("content").innerHTML = res;
+        init(event.currentTarget.id);
+      });
   });
 });
 
 setSideWidth();
+init("main")
