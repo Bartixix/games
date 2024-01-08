@@ -1,0 +1,64 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
+:root {
+  --side-menu-color: #e0e0e0;
+  --bgColor: #fff;
+  --color: #000;
+  --sideMenuPadding: 10px;
+}
+* {
+  margin: 0;
+  user-select: none;
+}
+body {
+  font-family: "Ubuntu", sans-serif;
+  background-color: var(--bgColor);
+  color: var(--color);
+
+  height: 100%;
+  width: 100vw;
+
+  display: flex;
+}
+#side-menu {
+  height: calc(100vh - (var(--sideMenuPadding) * 2));
+  width: 50px;
+  padding: var(--sideMenuPadding);
+  background-color: var(--side-menu-color);
+  position: absolute;
+  text-wrap: nowrap;
+  transition-duration: 500ms;
+  transition-timing-function: ease-in-out;
+  display: flex;
+  row-gap: 10px;
+  flex-direction: column;
+}
+#side-menu:hover {
+  width: var(--sideMenuWidth);
+}
+#content {
+  height: 100vh;
+  width: calc(100vw - 70px);
+  margin-left: 70px;
+}
+.side-menu-element {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  font-size: 45px;
+  font-weight: 700;
+  gap: var(--sideMenuPadding);
+  overflow: hidden;
+  color: #000;
+}
+button{
+  all: unset;
+  cursor: pointer;
+}
+img {
+  height: 50px;
+}
+#line {
+  border-top: #000 solid 5px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
