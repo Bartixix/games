@@ -1,0 +1,7 @@
+<div id="select">
+  <div id="load">
+    <input type="file" id="uploadFile" class="hidden" accept=".json" required />
+    <label class="form-btn" for="uploadFile">LOAD TOURNAMENT</label>
+  </div>
+  <div class="form-btn" id="create">CREATE TOURNAMENT</div>
+</div>

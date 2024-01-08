@@ -8,6 +8,8 @@
 * {
   margin: 0;
   user-select: none;
+  font-size: 30px;
+  font-weight: 700;
 }
 body {
   font-family: "Ubuntu", sans-serif;
@@ -16,6 +18,7 @@ body {
 
   height: 100%;
   width: 100vw;
+  min-width: 1600px;
 
   display: flex;
 }
@@ -36,16 +39,17 @@ body {
   width: var(--sideMenuWidth);
 }
 #content {
-  height: 100vh;
+  height: calc(100vh - 40px);
   width: calc(100vw - 70px);
   margin-left: 70px;
+
+  padding: 20px;
 }
 .side-menu-element {
   display: flex;
   justify-content: left;
   align-items: center;
   font-size: 45px;
-  font-weight: 700;
   gap: var(--sideMenuPadding);
   overflow: hidden;
   color: #000;
@@ -54,11 +58,35 @@ button, a{
   all: unset;
   cursor: pointer;
 }
+input{
+  all: unset;
+}
 img {
   height: 50px;
 }
-#line {
+.line {
   border-top: #000 solid 5px;
   border-radius: 10px;
   margin-bottom: 20px;
+}
+.hidden{
+  display: none;
+}
+form{
+  display: flex;
+  gap: 20px;
+}
+#select{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  text-wrap: nowrap;
+}
+.form-btn{
+  background-color: #0b4dda;
+  color: #fff;
+  padding: 5px 15px;
+  border-radius: 10px;
+  width: min-content;
 }
