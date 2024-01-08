@@ -12,18 +12,27 @@ function setSideWidth() {
   );
 }
 
-function init(target) {
+async function init(target) {
   switch (target) {
     case "main":
-      fetch("./html_pages/tournament.html.txt")
+      await fetch("./html_pages/tournament.html")
         .then((res) => res.text())
         .then((res) => (document.getElementById("content").innerHTML = res));
+
+      document.getElementById("uploadFile").addEventListener("change", (e) => {
+        let fr = new FileReader();
+        fr.onload=function(){
+          console.log(fr.result)
+        };
+        fr.readAsText(e.target.files[0]);
+      });
+      break;
   }
 }
 
 document.querySelectorAll(".clickable").forEach((element) => {
   element.addEventListener("click", function (event) {
-    fetch(`./html_pages/${event.currentTarget.id}.html.txt`)
+    fetch(`./html_pages/${event.currentTarget.id}.html`)
       .then((res) => res.text())
       .then((res) => (document.getElementById("content").innerHTML = res));
     init(event.currentTarget.id);
