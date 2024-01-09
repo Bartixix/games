@@ -117,6 +117,19 @@ label,
   padding: 3px;
 }
 .user-btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: var(--interactableBg);
   border-radius: 5px;
+  height: 47px;
+  width: 47px;
+}
+.user-btn>img{
+  height: 35px;
+  width: 35px;
+}
+.user{
+  display: flex;
+  gap: 10px;
 }

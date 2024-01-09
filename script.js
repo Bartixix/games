@@ -31,13 +31,19 @@ async function init(target) {
       await fetch("./html_pages/tournament.html")
         .then((res) => res.text())
         .then((res) => (document.getElementById("content").innerHTML = res));
-
       initTournament();
       break;
   }
 }
 
 function initTournament() {
+  const button = document.createElement("button");
+  button.innerText = "NEW USER";
+  button.id = "new-user";
+  button.className = "user-element";
+
+  button.addEventListener("click", (e) => createUser(1, false));
+
   document.getElementById("uploadFile").addEventListener("change", (e) => {
     let fr = new FileReader();
     fr.onload = function () {
@@ -47,14 +53,21 @@ function initTournament() {
   });
 
   document.getElementById("create").addEventListener("click", (e) => {
-    initCreate(4);
+    createUser(4, true);
   });
+
+  document.getElementById("players").appendChild(button);
 }
 
-function initCreate(count) {
-  for (let i = 0; i < count; i++) {
-    const parrent = document.getElementById("players");
+function createUser(count, clear) {
+  const parrent = document.getElementById("players");
+  if (clear)
+    while (parrent.children.length - 1 > 0)
+      parrent.removeChild(parrent.firstChild);
 
+  const elements = parrent.children.length - 1;
+
+  for (let i = elements; i < count + elements; i++) {
     const element = document.createElement("div");
     const input = document.createElement("input");
     const remvoeBtn = document.createElement("button");
@@ -64,13 +77,14 @@ function initCreate(count) {
     input.className = "user-element user-input";
     input.id = `user-input${i}`;
     input.placeholder = `Player ${i + 1}`;
-    input.required = true
+    input.required = true;
     remvoeBtn.className = "user-element user-btn";
     remvoeBtn.id = `user-btn${i}`;
+remvoeBtn.innerHTML = "<img src='src/x.png' />"
 
     element.appendChild(input);
     element.appendChild(remvoeBtn);
-    parrent.appendChild(element);
+    parrent.insertBefore(element, parrent.lastChild);
   }
 }
 
