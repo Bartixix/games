@@ -4,6 +4,7 @@
   --bgColor: #fff;
   --color: #000;
   --sideMenuPadding: 10px;
+  --interactableBg: #0b4dda;
 }
 * {
   margin: 0;
@@ -54,11 +55,12 @@ body {
   overflow: hidden;
   color: #000;
 }
-button, a{
+button,
+a {
   all: unset;
   cursor: pointer;
 }
-input{
+input {
   all: unset;
 }
 img {
@@ -69,24 +71,52 @@ img {
   border-radius: 10px;
   margin-bottom: 20px;
 }
-.hidden{
+.line-vertical {
+  border-left: #000 solid 5px;
+  border-radius: 10px;
+}
+.hidden {
   display: none;
 }
-form{
+form {
   display: flex;
   gap: 20px;
 }
-#select{
+#select {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 10px;
   text-wrap: nowrap;
+  margin-bottom: 5px;
 }
-.form-btn{
-  background-color: #0b4dda;
+.form-btn {
+  background-color: var(--interactableBg);
   color: #fff;
   padding: 5px 15px;
   border-radius: 10px;
   width: min-content;
+}
+label,
+#create {
+  cursor: pointer;
+}
+#UI {
+  display: flex;
+  justify-content: center;
+  height: calc(100% - 75px - 40px);
+}
+#players,
+#score {
+  width: calc(50% - 5px);
+}
+.user-input {
+  border: var(--interactableBg) solid 3px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  padding: 3px;
+}
+.user-btn{
+  background-color: var(--interactableBg);
+  border-radius: 5px;
 }
