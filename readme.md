@@ -1,7 +1,8 @@
 # INFO
 Watch progress on my project.
 
-# TODO
+Updates usually 1-3 times per day
+# TO DO
 1. Tournament parsers/loaders
 2. Scoreboards
 3. The game
