@@ -1,7 +1,21 @@
+let tournamentPresent = false;
+
 const pages = {
   game: "game",
   tournament: "tournament",
 };
+
+let usedPlayers = {};
+
+function parseToJSON() {
+  return "";
+}
+
+function parseToHTML() {}
+
+function getVlaueByKey(object, value) {
+  return Object.keys(object).find((key) => object[key] == value);
+}
 
 function setSideWidth() {
   let currentWidth = 0;
@@ -37,12 +51,7 @@ async function init(target) {
 }
 
 function initTournament() {
-  const button = document.createElement("button");
-  button.innerText = "NEW USER";
-  button.id = "new-user";
-  button.className = "user-element";
-
-  button.addEventListener("click", (e) => createUser(1, false));
+  const download = document.getElementById("download");
 
   document.getElementById("uploadFile").addEventListener("change", (e) => {
     let fr = new FileReader();
@@ -56,18 +65,56 @@ function initTournament() {
     createUser(4, true);
   });
 
-  document.getElementById("players").appendChild(button);
+  download.addEventListener("click", (e) => {
+    if (!tournamentPresent) return;
+
+    var element = document.createElement("a");
+    element.setAttribute(
+      "href",
+      "data:text/plain;charset=utf-8," + encodeURIComponent(parseToJSON())
+    );
+    element.setAttribute("download", "tournament.json");
+
+    element.style.display = "none";
+    document.body.appendChild(element);
+
+    element.click();
+
+    document.body.removeChild(element);
+  });
 }
 
 function createUser(count, clear) {
   const parrent = document.getElementById("players");
-  if (clear)
-    while (parrent.children.length - 1 > 0)
-      parrent.removeChild(parrent.firstChild);
+  if (clear) {
+    usedPlayers = {};
 
-  const elements = parrent.children.length - 1;
+    while (parrent.children.length > 0) parrent.removeChild(parrent.firstChild);
 
-  for (let i = elements; i < count + elements; i++) {
+    const button = document.createElement("button");
+
+    button.innerText = "NEW USER";
+    button.id = "new-user";
+    button.className = "user-element form-btn";
+
+    button.addEventListener("click", (e) => createUser(1, false));
+    document.getElementById("players").appendChild(button);
+
+    tournamentPresent = true;
+  }
+
+  if (Object.keys(usedPlayers).length >= 15) {
+    alert("User limit reached!");
+    return;
+  }
+
+  let j = 0;
+
+  for (let i = 0; j < count; i++) {
+    if (usedPlayers[i] != undefined) continue;
+
+    usedPlayers[i] = `user${i}`;
+
     const element = document.createElement("div");
     const input = document.createElement("input");
     const remvoeBtn = document.createElement("button");
@@ -80,22 +127,29 @@ function createUser(count, clear) {
     input.required = true;
     remvoeBtn.className = "user-element user-btn";
     remvoeBtn.id = `user-btn${i}`;
-remvoeBtn.innerHTML = "<img src='src/x.png' />"
+    remvoeBtn.innerHTML = "<img src='src/x.png' />";
+    remvoeBtn.addEventListener("click", (e) => {
+      delete usedPlayers[
+        getVlaueByKey(usedPlayers, e.currentTarget.parentNode.id)
+      ];
+      document.getElementById(e.currentTarget.parentNode.id).remove();
+    });
 
     element.appendChild(input);
     element.appendChild(remvoeBtn);
-    parrent.insertBefore(element, parrent.lastChild);
+    parrent.insertBefore(element, parrent.children[i]);
+
+    j++;
   }
 }
 
-document.querySelectorAll(".clickable").forEach((element) => {
-  element.addEventListener("click", function (event) {
-    fetch(`./html_pages/${event.currentTarget.id}.html`)
-      .then((res) => res.text())
-      .then((res) => (document.getElementById("content").innerHTML = res));
-    init(event.currentTarget.id);
-  });
-});
+function download() {}
+
+document
+  .querySelectorAll(".clickable")
+  .forEach((element) =>
+    element.addEventListener("click", (e) => init(e.currentTarget.id))
+  );
 
 setSideWidth();
 init("main");
