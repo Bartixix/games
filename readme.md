@@ -5,3 +5,5 @@ Watch progress on my project.
 1. Tournament parsers/loaders
 2. Scoreboards
 3. The game
+4. Tournament in game
+5. Code cleanup
