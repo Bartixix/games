@@ -17,8 +17,6 @@ function parseToJSON() {
   for (let i = 0; i < userElem.length; i++)
     data.users[Object.keys(data.userInfo)[i]] = userElem[i].firstChild.value;
 
-  console.log(data);
-
   return JSON.stringify(data);
 }
 
