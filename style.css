@@ -106,7 +106,7 @@ label,
 }
 #players,
 #score {
-  width: calc(50% - 5px);
+  width: calc(50% - 5px) !important;
 }
 .user-input {
   border: var(--interactableBg) solid 3px;
@@ -130,4 +130,24 @@ label,
 .user {
   display: flex;
   gap: 10px;
+}
+.user-score{
+  display: flex;
+  height: 35px !important;
+  flex-direction: row;
+  width: 100%;
+  padding: 3px;
+  border: var(--interactableBg) solid 3px;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  border-radius: 5px;
+}
+.user-score-points{
+  margin-left: auto;
+}
+#score{
+  all: unset;
+  display: flex;
+  flex-direction: column;
+  height: min-content;
 }

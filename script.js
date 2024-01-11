@@ -5,15 +5,44 @@ const pages = {
   tournament: "tournament",
 };
 
-let usedPlayers = {};
+let data = {
+  userInfo: {},
+  users: {},
+  score: {},
+  round: 0,
+};
 
 function parseToJSON() {
-  return "";
+  const userElem = document.getElementsByClassName("user");
+  for (let i = 0; i < userElem.length; i++) {
+    data.users[i] = userElem[i].firstChild.value;
+  }
+
+  return JSON.stringify(data);
 }
 
-function parseToHTML() {}
+function parseToHTML(string) {
+  const tData = JSON.parse(string);
+  const length = Object.keys(tData.userInfo).length;
 
-function getVlaueByKey(object, value) {
+  createUser(length, true);
+  data = tData;
+
+  const users = document.getElementsByClassName("user");
+  const score = document.getElementsByClassName("user-score");
+  for (let i = 0; i < length; i++) {
+    users[i].id = Object.values(data.userInfo)[i];
+    users[i].firstChild.value = Object.values(data.users)[i];
+    score[i].id = `user-score${getKeyByValue(
+      data.userInfo,
+      Object.values(data.userInfo)[i]
+    )}`;
+    score[i].firstChild.innerText = Object.values(data.users)[i];
+    score[i].lastChild.innerText = Object.values(data.score)[i];
+  }
+}
+
+function getKeyByValue(object, value) {
   return Object.keys(object).find((key) => object[key] == value);
 }
 
@@ -56,7 +85,8 @@ function initTournament() {
   document.getElementById("uploadFile").addEventListener("change", (e) => {
     let fr = new FileReader();
     fr.onload = function () {
-      console.log(fr.result);
+      //console.log(fr.result);
+      parseToHTML(fr.result);
     };
     fr.readAsText(e.target.files[0]);
   });
@@ -85,11 +115,14 @@ function initTournament() {
 }
 
 function createUser(count, clear) {
-  const parrent = document.getElementById("players");
+  const parent = document.getElementById("players");
+  const scoreParent = document.getElementById("score");
   if (clear) {
-    usedPlayers = {};
+    data.userInfo = {};
 
-    while (parrent.children.length > 0) parrent.removeChild(parrent.firstChild);
+    while (parent.childNodes.length > 0) parent.removeChild(parent.firstChild);
+    while (scoreParent.childNodes.length > 0)
+      scoreParent.removeChild(scoreParent.firstChild);
 
     const button = document.createElement("button");
 
@@ -103,7 +136,7 @@ function createUser(count, clear) {
     tournamentPresent = true;
   }
 
-  if (Object.keys(usedPlayers).length >= 15) {
+  if (Object.keys(data.userInfo).length >= 15) {
     alert("User limit reached!");
     return;
   }
@@ -111,9 +144,10 @@ function createUser(count, clear) {
   let j = 0;
 
   for (let i = 0; j < count; i++) {
-    if (usedPlayers[i] != undefined) continue;
+    if (data.userInfo[i] != undefined) continue;
 
-    usedPlayers[i] = `user${i}`;
+    data.userInfo[i] = `user${i}`;
+    data.score[i] = 0;
 
     const element = document.createElement("div");
     const input = document.createElement("input");
@@ -122,28 +156,55 @@ function createUser(count, clear) {
     element.className = "user";
     element.id = `user${i}`;
     input.className = "user-element user-input";
-    input.id = `user-input${i}`;
     input.placeholder = `Player ${i + 1}`;
     input.required = true;
+    input.maxLength = 20;
     remvoeBtn.className = "user-element user-btn";
-    remvoeBtn.id = `user-btn${i}`;
     remvoeBtn.innerHTML = "<img src='src/x.png' />";
     remvoeBtn.addEventListener("click", (e) => {
-      delete usedPlayers[
-        getVlaueByKey(usedPlayers, e.currentTarget.parentNode.id)
-      ];
-      document.getElementById(e.currentTarget.parentNode.id).remove();
+      const removeBaseKey = getKeyByValue(
+        data.userInfo,
+        e.currentTarget.parentNode.id
+      );
+
+      const baseId = e.currentTarget.parentNode.id;
+
+      delete data.userInfo[removeBaseKey];
+      delete data.score[removeBaseKey];
+      delete data.users[removeBaseKey];
+
+      console.log(JSON.stringify(data));
+
+      document.getElementById(baseId).remove();
+      document.getElementById(`user-score${baseId.slice(-1)}`).remove();
     });
 
     element.appendChild(input);
     element.appendChild(remvoeBtn);
-    parrent.insertBefore(element, parrent.children[i]);
+    parent.insertBefore(element, parent.children[i]);
 
+    const score = document.createElement("tr");
+    const name = document.createElement("td");
+    const value = document.createElement("td");
+
+    score.className = "user-score";
+    score.id = `user-score${i}`;
+    name.className = "user-score-element user-score-name";
+    name.id = `user-score-name${i}`;
+    value.className = "user-score-element user-score-points";
+    value.id = `user-score-points${i}`;
+    value.innerText = "0";
+
+    score.appendChild(name);
+    score.appendChild(value);
+    scoreParent.insertBefore(score, scoreParent.children[i]);
+
+    input.addEventListener("input", (e) => {
+      name.innerText = e.currentTarget.value;
+    });
     j++;
   }
 }
-
-function download() {}
 
 document
   .querySelectorAll(".clickable")
