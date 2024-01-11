@@ -14,9 +14,10 @@ let data = {
 
 function parseToJSON() {
   const userElem = document.getElementsByClassName("user");
-  for (let i = 0; i < userElem.length; i++) {
-    data.users[i] = userElem[i].firstChild.value;
-  }
+  for (let i = 0; i < userElem.length; i++)
+    data.users[Object.keys(data.userInfo)[i]] = userElem[i].firstChild.value;
+
+  console.log(data);
 
   return JSON.stringify(data);
 }
@@ -33,10 +34,7 @@ function parseToHTML(string) {
   for (let i = 0; i < length; i++) {
     users[i].id = Object.values(data.userInfo)[i];
     users[i].firstChild.value = Object.values(data.users)[i];
-    score[i].id = `user-score${getKeyByValue(
-      data.userInfo,
-      Object.values(data.userInfo)[i]
-    )}`;
+    score[i].id = `user-score${Object.keys(data.userInfo)[i]}`;
     score[i].firstChild.innerText = Object.values(data.users)[i];
     score[i].lastChild.innerText = Object.values(data.score)[i];
   }
@@ -172,8 +170,6 @@ function createUser(count, clear) {
       delete data.userInfo[removeBaseKey];
       delete data.score[removeBaseKey];
       delete data.users[removeBaseKey];
-
-      console.log(JSON.stringify(data));
 
       document.getElementById(baseId).remove();
       document.getElementById(`user-score${baseId.slice(-1)}`).remove();
