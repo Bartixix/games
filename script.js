@@ -1,8 +1,14 @@
 let tournamentPresent = false;
 
-const pages = {
-  game: "game",
-  tournament: "tournament",
+const select = {
+  pages: {
+    game: "game",
+    tournament: "tournament",
+  },
+  icon: {
+    game: "src/tetris.png",
+    tournament: "src/trophy.png",
+  },
 };
 
 let data = {
@@ -57,16 +63,25 @@ function setSideWidth() {
 }
 
 async function init(target) {
+  const icon = document.getElementById("icon");
+  const title = document.querySelector("title");
+
   switch (target) {
     case "main":
-      await init(pages.tournament);
+      await init(select.pages.tournament);
       break;
-    case pages.game:
+    case select.pages.game:
+      icon.setAttribute("href", select.icon.game);
+      title.innerText = "PLAY TETRIS";
+
       await fetch("./html_pages/game.html")
         .then((res) => res.text())
         .then((res) => (document.getElementById("content").innerHTML = res));
       break;
-    case pages.tournament:
+    case select.pages.tournament:
+      icon.setAttribute("href", select.icon.tournament);
+      title.innerText = "CREATE TOURNAMENT";
+
       await fetch("./html_pages/tournament.html")
         .then((res) => res.text())
         .then((res) => (document.getElementById("content").innerHTML = res));
@@ -99,11 +114,12 @@ function initTournament() {
       "href",
       "data:text/plain;charset=utf-8," + encodeURIComponent(parseToJSON())
     );
+
     element.setAttribute("download", "tournament.json");
-
     element.style.display = "none";
-    document.body.appendChild(element);
 
+    document.body.appendChild(element);
+    
     element.click();
 
     document.body.removeChild(element);
@@ -132,7 +148,7 @@ function createUser(count, clear) {
     tournamentPresent = true;
   }
 
-  if (Object.keys(data.userInfo).length >= 15) {
+  if (Object.keys(data.userInfo).length >= 10) {
     alert("User limit reached!");
     return;
   }
