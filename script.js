@@ -48,12 +48,16 @@ function getKeyByValue(object, value) {
   return Object.keys(object).find((key) => object[key] == value);
 }
 
-function setSideWidth() {
+async function setSideWidth() {
+  await new Promise((r) => setTimeout(r, 100));
+
   let currentWidth = 0;
   const elements = document.querySelectorAll(".side-menu-element");
   elements.forEach((element) => {
-    if (element.scrollWidth > currentWidth && element.id != "line")
+    console.log(element.scrollWidth);
+    if (element.scrollWidth > currentWidth && element.id != "line") {
       currentWidth = element.scrollWidth;
+    }
   });
 
   document.documentElement.style.setProperty(
@@ -119,7 +123,7 @@ function initTournament() {
     element.style.display = "none";
 
     document.body.appendChild(element);
-    
+
     element.click();
 
     document.body.removeChild(element);
