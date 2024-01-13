@@ -54,7 +54,6 @@ async function setSideWidth() {
   let currentWidth = 0;
   const elements = document.querySelectorAll(".side-menu-element");
   elements.forEach((element) => {
-    console.log(element.scrollWidth);
     if (element.scrollWidth > currentWidth && element.id != "line") {
       currentWidth = element.scrollWidth;
     }
