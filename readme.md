@@ -6,7 +6,8 @@ Updates usually 1-3 times per day
 Requires server or additional CORS functionality to run loccaly.
 # TO DO
 1. ~~Tournament parsers/loaders~~
-2. Scoreboards (done in code)
-3. The game
-4. Tournament in game
-5. Code cleanup
+2. Game-tournament site sync
+3. Scoreboards (done in code)
+4. The game
+5. Tournament in game
+6. Code cleanup
