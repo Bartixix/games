@@ -80,7 +80,7 @@ async function init(target) {
       await fetch("./html_pages/game.html")
         .then((res) => res.text())
         .then((res) => (document.getElementById("content").innerHTML = res));
-        initGame();
+      initGame();
       break;
     case select.pages.tournament:
       icon.setAttribute("href", select.icon.tournament);
@@ -94,8 +94,14 @@ async function init(target) {
   }
 }
 
-function initGame(){
-  
+function initGame() {
+  document.getElementById("save").addEventListener("change", (e) => {
+    let fr = new FileReader();
+    fr.onload = () => {
+      loadScore()
+    };
+    fr.readAsText(e.target.files[0]);
+  });
 }
 
 function initTournament() {
@@ -103,7 +109,7 @@ function initTournament() {
 
   document.getElementById("uploadFile").addEventListener("change", (e) => {
     let fr = new FileReader();
-    fr.onload = function () {
+    fr.onload = () => {
       parseToHTML(fr.result);
     };
     fr.readAsText(e.target.files[0]);

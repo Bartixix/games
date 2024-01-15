@@ -86,7 +86,7 @@ form {
   align-items: center;
   gap: 10px;
   text-wrap: nowrap;
-  margin-bottom: 5px;
+  margin-bottom: 7px;
 }
 .form-btn {
   background-color: var(--interactableBg);
