@@ -80,6 +80,7 @@ async function init(target) {
       await fetch("./html_pages/game.html")
         .then((res) => res.text())
         .then((res) => (document.getElementById("content").innerHTML = res));
+        initGame();
       break;
     case select.pages.tournament:
       icon.setAttribute("href", select.icon.tournament);
@@ -93,13 +94,16 @@ async function init(target) {
   }
 }
 
+function initGame(){
+  
+}
+
 function initTournament() {
   const download = document.getElementById("download");
 
   document.getElementById("uploadFile").addEventListener("change", (e) => {
     let fr = new FileReader();
     fr.onload = function () {
-      console.log("tour")
       parseToHTML(fr.result);
     };
     fr.readAsText(e.target.files[0]);
