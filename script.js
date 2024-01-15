@@ -49,7 +49,7 @@ function getKeyByValue(object, value) {
 }
 
 async function setSideWidth() {
-  await new Promise((r) => setTimeout(r, 100));
+  await new Promise((r) => setTimeout(r, 250));
 
   let currentWidth = 0;
   const elements = document.querySelectorAll(".side-menu-element");
