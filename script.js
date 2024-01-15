@@ -99,6 +99,7 @@ function initTournament() {
   document.getElementById("uploadFile").addEventListener("change", (e) => {
     let fr = new FileReader();
     fr.onload = function () {
+      console.log("tour")
       parseToHTML(fr.result);
     };
     fr.readAsText(e.target.files[0]);
