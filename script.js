@@ -71,7 +71,7 @@ async function init(target) {
 
   switch (target) {
     case "main":
-      await init(select.pages.tournament);
+      await init(select.pages.game);
       break;
     case select.pages.game:
       icon.setAttribute("href", select.icon.game);
