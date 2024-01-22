@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
+
 :root {
   --side-menu-color: #e0e0e0;
   --bgColor: #fff;
@@ -6,12 +7,14 @@
   --sideMenuPadding: 10px;
   --interactableBg: #0b4dda;
 }
+
 * {
   margin: 0;
   user-select: none;
   font-size: 30px;
   font-weight: 700;
 }
+
 body {
   font-family: "Ubuntu", sans-serif;
   background-color: var(--bgColor);
@@ -20,6 +23,7 @@ body {
   width: 100vw;
   display: flex;
 }
+
 #side-menu {
   height: calc(100vh - (var(--sideMenuPadding) * 2));
   width: 50px;
@@ -33,9 +37,11 @@ body {
   row-gap: 10px;
   flex-direction: column;
 }
+
 #side-menu:hover {
   width: var(--sideMenuWidth);
 }
+
 #content {
   height: calc(100vh - 40px);
   width: calc(100vw - 70px);
@@ -43,6 +49,7 @@ body {
 
   padding: 20px;
 }
+
 .side-menu-element {
   display: flex;
   justify-content: left;
@@ -52,34 +59,42 @@ body {
   overflow: hidden;
   color: #000;
 }
+
 button,
 a {
   all: unset;
   cursor: pointer;
   text-wrap: nowrap;
 }
+
 input {
   all: unset;
 }
+
 img {
   height: 50px;
 }
+
 .line {
   border-top: #000 solid 5px;
   border-radius: 10px;
   margin-bottom: 20px;
 }
+
 .line-vertical {
   border-left: #000 solid 5px;
   border-radius: 10px;
 }
+
 .hidden {
   display: none;
 }
+
 form {
   display: flex;
   gap: 20px;
 }
+
 #select {
   display: flex;
   flex-direction: row;
@@ -88,6 +103,7 @@ form {
   text-wrap: nowrap;
   margin-bottom: 7px;
 }
+
 .form-btn {
   background-color: var(--interactableBg);
   color: #fff;
@@ -95,25 +111,30 @@ form {
   border-radius: 10px;
   width: min-content;
 }
+
 label,
 #create {
   cursor: pointer;
 }
+
 #UI {
   display: flex;
   justify-content: center;
   height: calc(100% - 75px - 40px);
 }
+
 #players,
 #score {
   width: calc(50% - 5px) !important;
 }
+
 .user-input {
   border: var(--interactableBg) solid 3px;
   border-radius: 5px;
   margin-bottom: 5px;
   padding: 3px;
 }
+
 .user-btn {
   display: flex;
   justify-content: center;
@@ -123,15 +144,18 @@ label,
   height: 47px;
   width: 47px;
 }
-.user-btn > img {
+
+.user-btn>img {
   height: 35px;
   width: 35px;
 }
+
 .user {
   display: flex;
   gap: 10px;
 }
-.user-score{
+
+.user-score {
   display: flex;
   height: 35px !important;
   flex-direction: row;
@@ -142,12 +166,24 @@ label,
   margin-left: 5px;
   border-radius: 5px;
 }
-.user-score-points{
+
+.user-score-points {
   margin-left: auto;
 }
-#score{
+
+#score {
   all: unset;
   display: flex;
   flex-direction: column;
   height: min-content;
 }
+
+#play {
+  height: 600px;
+  width: 300px;
+  display: grid;
+  grid-template-columns: repeat(20, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+}
+
+#side-panel {}

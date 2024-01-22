@@ -98,7 +98,7 @@ function initGame() {
   document.getElementById("save").addEventListener("change", (e) => {
     let fr = new FileReader();
     fr.onload = () => {
-      loadScore()
+      loadScore();
     };
     fr.readAsText(e.target.files[0]);
   });
