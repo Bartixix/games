@@ -95,6 +95,8 @@ async function init(target) {
 }
 
 function initGame() {
+  const canvas = document.getElementById("play");
+
   document.getElementById("save").addEventListener("change", (e) => {
     let fr = new FileReader();
     fr.onload = () => {
