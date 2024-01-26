@@ -179,11 +179,8 @@ label,
 }
 
 #play {
-  height: 600px;
-  width: 300px;
-  display: grid;
-  grid-template-columns: repeat(20, 1fr);
-  grid-template-rows: repeat(10, 1fr);
+  height: 70vh;
+  width: 35vh;
 }
 
 #side-panel {}
